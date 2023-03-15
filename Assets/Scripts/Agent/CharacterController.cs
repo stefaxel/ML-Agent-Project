@@ -16,9 +16,11 @@ public class CharacterController : MonoBehaviour
     public float TurnInput { get; set; }
     public bool JumpInput { get; set; }
 
+    public bool ButtonInput { get; set; }
+
     new private Rigidbody rigidbody;
     private CapsuleCollider capsuleCollider;
-
+    
     private void Awake()
     {
         rigidbody= GetComponent<Rigidbody>();
@@ -31,6 +33,11 @@ public class CharacterController : MonoBehaviour
     }
 
     // Update is called once per frame
+    private void Update()
+    {
+        PressButtonAction();
+    }
+
     void FixedUpdate()
     {
         CheckGrounded();
@@ -88,6 +95,27 @@ public class CharacterController : MonoBehaviour
                 // Override just the forward velocity with player input at half speed
                 Vector3 verticalVelocity = Vector3.Project(rigidbody.velocity, Vector3.up);
                 rigidbody.velocity = verticalVelocity + transform.forward * Mathf.Clamp(ForwardInput, -1f, 1f) * moveSpeed / 2f;
+            }
+        }
+
+        
+    }
+
+    private void PressButtonAction()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            float interactZone = .5f;
+            Collider[] collider3DArray = Physics.OverlapBox(transform.position, Vector3.one * interactZone);
+            foreach (Collider collider in collider3DArray)
+            {
+                if(collider.TryGetComponent(out Button activatePlatform))
+                {
+                    if (activatePlatform.CanUseButton())
+                    {
+                        activatePlatform.UseButton();
+                    }
+                }
             }
         }
     }
