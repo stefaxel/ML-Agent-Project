@@ -11,9 +11,10 @@ public class Button : MonoBehaviour
     public event EventHandler OnUsed;
 
     public GameObject platform;
+    public bool isPlatformActive;
 
     //[SerializeField] private Transform buttonTransform;
-    private bool canUseButton;
+    public bool canUseButton;
 
     private void Awake()
     {
@@ -35,12 +36,14 @@ public class Button : MonoBehaviour
             OnUsed?.Invoke(this, EventArgs.Empty);
 
             //platform.SetActive(true);
+            //isPlatformActive = true;
         }
     }
 
     public void ResetButton()
     {
         canUseButton = true;
+        //isPlatformActive = false;
         //platform.SetActive(false);
     }
 

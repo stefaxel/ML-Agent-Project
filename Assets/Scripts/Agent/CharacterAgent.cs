@@ -3,33 +3,72 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
+using System;
+using Unity.MLAgents.Sensors;
 
 public class CharacterAgent : Agent
 {
+    public event EventHandler OnCollectCoin;
+    public event EventHandler OnEpisodeBeginEvent;
+
     [SerializeField] private GameObject platform;
     [SerializeField] private GameObject buttonPlatform;
 
     [SerializeField] private Button platformButton;
 
-    private Vector3 startPosition;
+    private Vector3 startPositionPlatform;
+    private Vector3 startPositionButton;
     private CharacterController characterController;
     new private Rigidbody rigidbody;
 
     public override void Initialize()
     {
-        startPosition = transform.position;
+        startPositionPlatform = transform.position;
+        startPositionButton = transform.position;
         characterController = GetComponent<CharacterController>();
+        //platformButton = GetComponent<Button>();
         rigidbody = GetComponent<Rigidbody>();
     }
 
     public override void OnEpisodeBegin()
     {
-        transform.position = startPosition;
-        transform.rotation = Quaternion.Euler(Vector3.up * Random.Range(0f, 360f));
+        transform.position = startPositionButton;
+        transform.rotation = Quaternion.Euler(Vector3.up * UnityEngine.Random.Range(0f, 360f));
         rigidbody.velocity = Vector3.zero;
 
-        platform.transform.position = startPosition + Quaternion.Euler(Vector3.up * Random.Range(0f, 360f)) * Vector3.forward * 5f;
-        buttonPlatform.transform.position = startPosition + Quaternion.Euler(Vector3.up * Random.Range(0f, 360f)) * Vector3.forward * 5f;
+        buttonPlatform.transform.position = startPositionButton + Quaternion.Euler(Vector3.up * UnityEngine.Random.Range(0f, 360f)) * Vector3.forward * 5f;
+
+        OnEpisodeBeginEvent?.Invoke(this, EventArgs.Empty);
+
+        transform.position = startPositionPlatform;
+        transform.rotation = Quaternion.Euler(Vector3.up * UnityEngine.Random.Range(0f, 360f));
+        rigidbody.velocity = Vector3.zero;
+
+        platform.transform.position = startPositionPlatform + Quaternion.Euler(Vector3.up * UnityEngine.Random.Range(0f, 360f)) * Vector3.forward * 5f;
+
+    }
+
+    public override void CollectObservations(VectorSensor sensor)
+    {
+        sensor.AddObservation(platformButton.CanUseButton() ? 1 : 0);
+
+        Vector3 dirToPlatformButon = (buttonPlatform.transform.localPosition - transform.position).normalized;
+        sensor.AddObservation(dirToPlatformButon.x);
+        sensor.AddObservation(dirToPlatformButon.z);
+
+        sensor.AddObservation(platformButton.isPlatformActive ? 1 : 0);
+
+        if (platformButton.isPlatformActive)
+        {
+            Vector3 dirToCoin = (platform.transform.localPosition - transform.position).normalized;
+            sensor.AddObservation(dirToCoin.x);
+            sensor.AddObservation(dirToCoin.z);
+        }
+        else
+        {
+            sensor.AddObservation(0f);
+            sensor.AddObservation(0f);
+        }
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -48,9 +87,17 @@ public class CharacterAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        if (Vector3.Distance(startPosition, transform.position) > 10f)
+        if (Vector3.Distance(startPositionButton, transform.position) > 10f)
         {
             AddReward(-1f);
+            platformButton.ResetButton();
+            EndEpisode();
+        }
+
+        if (Vector3.Distance(startPositionPlatform, transform.position) > 10f)
+        {
+            AddReward(-1f);
+            platformButton.ResetButton();
             EndEpisode();
         }
 
@@ -78,22 +125,33 @@ public class CharacterAgent : Agent
                         //Debug.Log("Collison with button, adding reward");
                         activatePlatform.UseButton();
                         AddReward(1f);
-                        activatePlatform.ResetButton();
+                        platformButton.ResetButton();
                         EndEpisode();
                     }
                 }
             }
+
         }
+        //AddReward(-1f / MaxStep);
 
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        //if (other.tag == "coin")
+        //if (platformButton.isPlatformActive && platformButton.canUseButton)
         //{
-        //    AddReward(1f);
+        //    //platformButton.platform.SetActive(false);
         //    platformButton.ResetButton();
+        //    AddReward(-1f);
         //    EndEpisode();
         //}
     }
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.tag == "coin")
+    //    {
+    //        AddReward(1f);
+    //        platformButton.ResetButton();
+    //        OnCollectCoin?.Invoke(this, EventArgs.Empty);
+
+    //        EndEpisode();
+    //    }
+    //}
 }
