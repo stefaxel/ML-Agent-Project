@@ -1,5 +1,5 @@
 behaviors:
-  ButtonPress:
+  CoinCollector:
     trainer_type: ppo
     hyperparameters:
       batch_size: 128
@@ -19,12 +19,6 @@ behaviors:
       extrinsic:
         gamma: 0.99
         strength: 1.0
-      gail:
-        strength: 0.5
-        demo_path: Demos/TestButton.demo
-    behavioral_cloning:
-      strength: 0.5
-      demo_path: Demos/TestButton.demo
     keep_checkpoints: 5
     max_steps: 20000000
     time_horizon: 128

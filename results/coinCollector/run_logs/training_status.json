@@ -1,0 +1,29 @@
+{
+    "CoinCollector": {
+        "checkpoints": [
+            {
+                "steps": 191983,
+                "file_path": "results\\coinCollector\\CoinCollector\\CoinCollector-191983.onnx",
+                "reward": 0.0,
+                "creation_time": 1679007757.5711646,
+                "auxillary_file_paths": [
+                    "results\\coinCollector\\CoinCollector\\CoinCollector-191983.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 191983,
+            "file_path": "results\\coinCollector\\CoinCollector.onnx",
+            "reward": 0.0,
+            "creation_time": 1679007757.5711646,
+            "auxillary_file_paths": [
+                "results\\coinCollector\\CoinCollector\\CoinCollector-191983.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.13.1+cpu"
+    }
+}

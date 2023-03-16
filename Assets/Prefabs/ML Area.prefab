@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &65850656
 Transform:
   m_ObjectHideFlags: 0
@@ -224,10 +224,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1abb7314df5c2c24b879485bb7e27969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agentTransform: {fileID: 908377622743892756}
-  platform: {fileID: 908377623933833324}
-  isPlatformActive: 0
-  canUseButton: 0
 --- !u!1 &908377622743892759
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,8 +382,6 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 4000
   platform: {fileID: 908377623933833324}
-  buttonPlatform: {fileID: 65850655}
-  platformButton: {fileID: 988777288}
 --- !u!114 &908377622743892744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,7 +412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 6
+    VectorObservationSize: 0
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -427,10 +421,10 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: da1d6b21ea4950245b01eafc68d7248e, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: f993d1b5b7179864bb48fcffda8a0613, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
-  m_BehaviorName: ButtonPress
+  m_BehaviorName: CoinCollector
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
@@ -452,10 +446,10 @@ MonoBehaviour:
   - coin
   - platform
   - button
-  m_RaysPerDirection: 10
+  m_RaysPerDirection: 20
   m_MaxRayDegrees: 70
   m_SphereCastRadius: 0.1
-  m_RayLength: 15
+  m_RayLength: 30
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -492,7 +486,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Record: 0
   NumStepsToRecord: 0
-  DemonstrationName: ButtonPressDemo
+  DemonstrationName: TestButton
   DemonstrationDirectory: Demos
 --- !u!1 &908377623437459526
 GameObject:
@@ -669,7 +663,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &908377623933833312
 Transform:
   m_ObjectHideFlags: 0

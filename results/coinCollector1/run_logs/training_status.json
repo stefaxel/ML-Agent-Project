@@ -1,0 +1,47 @@
+{
+    "CoinCollector": {
+        "checkpoints": [
+            {
+                "steps": 499947,
+                "file_path": "results\\coinCollector1\\CoinCollector\\CoinCollector-499947.onnx",
+                "reward": null,
+                "creation_time": 1679008097.7453783,
+                "auxillary_file_paths": [
+                    "results\\coinCollector1\\CoinCollector\\CoinCollector-499947.pt"
+                ]
+            },
+            {
+                "steps": 999994,
+                "file_path": "results\\coinCollector1\\CoinCollector\\CoinCollector-999994.onnx",
+                "reward": 1.0,
+                "creation_time": 1679008425.9173687,
+                "auxillary_file_paths": [
+                    "results\\coinCollector1\\CoinCollector\\CoinCollector-999994.pt"
+                ]
+            },
+            {
+                "steps": 1283005,
+                "file_path": "results\\coinCollector1\\CoinCollector\\CoinCollector-1283005.onnx",
+                "reward": 1.0,
+                "creation_time": 1679008689.398738,
+                "auxillary_file_paths": [
+                    "results\\coinCollector1\\CoinCollector\\CoinCollector-1283005.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1283005,
+            "file_path": "results\\coinCollector1\\CoinCollector.onnx",
+            "reward": 1.0,
+            "creation_time": 1679008689.398738,
+            "auxillary_file_paths": [
+                "results\\coinCollector1\\CoinCollector\\CoinCollector-1283005.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.13.1+cpu"
+    }
+}
