@@ -1,0 +1,47 @@
+{
+    "ButtonPress": {
+        "checkpoints": [
+            {
+                "steps": 499979,
+                "file_path": "results\\MoveToButton_7\\ButtonPress\\ButtonPress-499979.onnx",
+                "reward": 1.0,
+                "creation_time": 1678923707.6669104,
+                "auxillary_file_paths": [
+                    "results\\MoveToButton_7\\ButtonPress\\ButtonPress-499979.pt"
+                ]
+            },
+            {
+                "steps": 999980,
+                "file_path": "results\\MoveToButton_7\\ButtonPress\\ButtonPress-999980.onnx",
+                "reward": 1.0,
+                "creation_time": 1678923999.3747404,
+                "auxillary_file_paths": [
+                    "results\\MoveToButton_7\\ButtonPress\\ButtonPress-999980.pt"
+                ]
+            },
+            {
+                "steps": 1406816,
+                "file_path": "results\\MoveToButton_7\\ButtonPress\\ButtonPress-1406816.onnx",
+                "reward": 1.0,
+                "creation_time": 1678924304.472857,
+                "auxillary_file_paths": [
+                    "results\\MoveToButton_7\\ButtonPress\\ButtonPress-1406816.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1406816,
+            "file_path": "results\\MoveToButton_7\\ButtonPress.onnx",
+            "reward": 1.0,
+            "creation_time": 1678924304.472857,
+            "auxillary_file_paths": [
+                "results\\MoveToButton_7\\ButtonPress\\ButtonPress-1406816.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.13.1+cpu"
+    }
+}

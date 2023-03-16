@@ -34,14 +34,14 @@ public class Button : MonoBehaviour
 
             OnUsed?.Invoke(this, EventArgs.Empty);
 
-            platform.SetActive(true);
+            //platform.SetActive(true);
         }
     }
 
     public void ResetButton()
     {
         canUseButton = true;
-        platform.SetActive(false);
+        //platform.SetActive(false);
     }
 
 }

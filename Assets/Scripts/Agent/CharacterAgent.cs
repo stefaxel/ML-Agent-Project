@@ -17,16 +17,16 @@ public class CharacterAgent : Agent
 
     public override void Initialize()
     {
-        startPosition= transform.position;
+        startPosition = transform.position;
         characterController = GetComponent<CharacterController>();
-        rigidbody= GetComponent<Rigidbody>();
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     public override void OnEpisodeBegin()
     {
-        transform.position= startPosition;
-        transform.rotation= Quaternion.Euler(Vector3.up * Random.Range(0f,360f));
-        rigidbody.velocity= Vector3.zero;
+        transform.position = startPosition;
+        transform.rotation = Quaternion.Euler(Vector3.up * Random.Range(0f, 360f));
+        rigidbody.velocity = Vector3.zero;
 
         platform.transform.position = startPosition + Quaternion.Euler(Vector3.up * Random.Range(0f, 360f)) * Vector3.forward * 5f;
         buttonPlatform.transform.position = startPosition + Quaternion.Euler(Vector3.up * Random.Range(0f, 360f)) * Vector3.forward * 5f;
@@ -37,7 +37,7 @@ public class CharacterAgent : Agent
         int vertical = Mathf.RoundToInt(Input.GetAxisRaw("Vertical"));
         int horizontal = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
         bool jump = Input.GetKey(KeyCode.Space);
-        bool interact = Input.GetKey(KeyCode.E);
+        bool interact = Input.GetKey(KeyCode.LeftShift);
 
         ActionSegment<int> actions = actionsOut.DiscreteActions;
         actions[0] = vertical >= 0 ? vertical : 2;
@@ -48,7 +48,7 @@ public class CharacterAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        if(Vector3.Distance(startPosition, transform.position) > 10f)
+        if (Vector3.Distance(startPosition, transform.position) > 10f)
         {
             AddReward(-1f);
             EndEpisode();
@@ -59,12 +59,13 @@ public class CharacterAgent : Agent
         bool jump = actions.DiscreteActions[2] > 0;
         bool interact = actions.DiscreteActions[3] == 1;
 
+
         characterController.ForwardInput = vertical;
         characterController.TurnInput = horizontal;
         characterController.JumpInput = jump;
         characterController.ButtonInput = interact;
 
-        if(interact)
+        if (interact)
         {
             float interactZone = .5f;
             Collider[] collider3DArray = Physics.OverlapBox(transform.position, Vector3.one * interactZone);
@@ -74,20 +75,25 @@ public class CharacterAgent : Agent
                 {
                     if (activatePlatform.CanUseButton())
                     {
+                        //Debug.Log("Collison with button, adding reward");
+                        activatePlatform.UseButton();
                         AddReward(1f);
+                        activatePlatform.ResetButton();
+                        EndEpisode();
                     }
                 }
             }
         }
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "coin")
-        {
-            AddReward(1f);
-            platformButton.ResetButton();
-            EndEpisode();
-        }
+        //if (other.tag == "coin")
+        //{
+        //    AddReward(1f);
+        //    platformButton.ResetButton();
+        //    EndEpisode();
+        //}
     }
 }

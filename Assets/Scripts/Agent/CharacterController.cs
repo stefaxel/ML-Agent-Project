@@ -35,7 +35,7 @@ public class CharacterController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        PressButtonAction();
+        //PressButtonAction();
     }
 
     void FixedUpdate()
@@ -101,22 +101,22 @@ public class CharacterController : MonoBehaviour
         
     }
 
-    private void PressButtonAction()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            float interactZone = .5f;
-            Collider[] collider3DArray = Physics.OverlapBox(transform.position, Vector3.one * interactZone);
-            foreach (Collider collider in collider3DArray)
-            {
-                if(collider.TryGetComponent(out Button activatePlatform))
-                {
-                    if (activatePlatform.CanUseButton())
-                    {
-                        activatePlatform.UseButton();
-                    }
-                }
-            }
-        }
-    }
+    //private void PressButtonAction()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.LeftShift))
+    //    {
+    //        float interactZone = .5f;
+    //        Collider[] collider3DArray = Physics.OverlapBox(transform.position, Vector3.one * interactZone);
+    //        foreach (Collider collider in collider3DArray)
+    //        {
+    //            if(collider.TryGetComponent(out Button activatePlatform))
+    //            {
+    //                if (activatePlatform.CanUseButton())
+    //                {
+    //                    activatePlatform.UseButton();
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
 }

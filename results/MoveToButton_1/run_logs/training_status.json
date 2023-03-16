@@ -1,0 +1,38 @@
+{
+    "ButtonPress": {
+        "checkpoints": [
+            {
+                "steps": 499933,
+                "file_path": "results\\MoveToButton_1\\ButtonPress\\ButtonPress-499933.onnx",
+                "reward": 0.0,
+                "creation_time": 1678920064.7372513,
+                "auxillary_file_paths": [
+                    "results\\MoveToButton_1\\ButtonPress\\ButtonPress-499933.pt"
+                ]
+            },
+            {
+                "steps": 913359,
+                "file_path": "results\\MoveToButton_1\\ButtonPress\\ButtonPress-913359.onnx",
+                "reward": 0.0,
+                "creation_time": 1678920361.6512206,
+                "auxillary_file_paths": [
+                    "results\\MoveToButton_1\\ButtonPress\\ButtonPress-913359.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 913359,
+            "file_path": "results\\MoveToButton_1\\ButtonPress.onnx",
+            "reward": 0.0,
+            "creation_time": 1678920361.6512206,
+            "auxillary_file_paths": [
+                "results\\MoveToButton_1\\ButtonPress\\ButtonPress-913359.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.13.1+cpu"
+    }
+}
