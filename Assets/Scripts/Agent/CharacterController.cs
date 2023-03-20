@@ -109,7 +109,7 @@ public class CharacterController : MonoBehaviour
     //        Collider[] collider3DArray = Physics.OverlapBox(transform.position, Vector3.one * interactZone);
     //        foreach (Collider collider in collider3DArray)
     //        {
-    //            if(collider.TryGetComponent(out Button activatePlatform))
+    //            if (collider.TryGetComponent(out Button activatePlatform))
     //            {
     //                if (activatePlatform.CanUseButton())
     //                {

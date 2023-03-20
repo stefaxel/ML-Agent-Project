@@ -12,9 +12,9 @@ public class CharacterAgent : Agent
     //public event EventHandler OnEpisodeBeginEvent;
 
     [SerializeField] private GameObject platform;
-    //[SerializeField] private GameObject buttonPlatform;
+    [SerializeField] private GameObject buttonPlatform;
 
-    //[SerializeField] private Button platformButton;
+    [SerializeField] private Button platformButton;
 
     private Vector3 startPositionPlatform;
     private Vector3 startPositionButton;
@@ -24,24 +24,24 @@ public class CharacterAgent : Agent
     public override void Initialize()
     {
         startPositionPlatform = transform.position;
-        //startPositionButton = transform.position;
+        startPositionButton = transform.position;
         characterController = GetComponent<CharacterController>();
         rigidbody = GetComponent<Rigidbody>();
     }
 
     public override void OnEpisodeBegin()
     {
-        //transform.position = startPositionButton;
-        //transform.rotation = Quaternion.Euler(Vector3.up * UnityEngine.Random.Range(0f, 360f));
-        //rigidbody.velocity = Vector3.zero;
-
-        //buttonPlatform.transform.position = startPositionButton + Quaternion.Euler(Vector3.up * UnityEngine.Random.Range(0f, 360f)) * Vector3.forward * 5f;
-
-        transform.position = startPositionPlatform;
+        transform.position = startPositionButton;
         transform.rotation = Quaternion.Euler(Vector3.up * UnityEngine.Random.Range(0f, 360f));
         rigidbody.velocity = Vector3.zero;
 
-        platform.transform.position = startPositionPlatform + Quaternion.Euler(Vector3.up * UnityEngine.Random.Range(0f, 360f)) * Vector3.forward * 5f;
+        buttonPlatform.transform.position = startPositionButton + Quaternion.Euler(Vector3.up * UnityEngine.Random.Range(0f, 360f)) * Vector3.forward * 5f;
+
+        //transform.position = startPositionPlatform;
+        //transform.rotation = Quaternion.Euler(Vector3.up * UnityEngine.Random.Range(0f, 360f));
+        //rigidbody.velocity = Vector3.zero;
+
+        //platform.transform.position = startPositionPlatform + Quaternion.Euler(Vector3.up * UnityEngine.Random.Range(0f, 360f)) * Vector3.forward * 5f;
 
         //OnEpisodeBeginEvent?.Invoke(this, EventArgs.Empty);
 
@@ -86,19 +86,19 @@ public class CharacterAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        //if (Vector3.Distance(startPositionButton, transform.position) > 10f)
+        if (Vector3.Distance(startPositionButton, transform.position) > 10f)
+        {
+            AddReward(-1f);
+            platformButton.ResetButton();
+            EndEpisode();
+        }
+
+        //if (Vector3.Distance(startPositionPlatform, transform.position) > 10f)
         //{
         //    AddReward(-1f);
         //    //platformButton.ResetButton();
         //    EndEpisode();
         //}
-
-        if (Vector3.Distance(startPositionPlatform, transform.position) > 10f)
-        {
-            AddReward(-1f);
-            //platformButton.ResetButton();
-            EndEpisode();
-        }
 
         float vertical = actions.DiscreteActions[0] <= 1 ? actions.DiscreteActions[0] : -1;
         float horizontal = actions.DiscreteActions[1] <= 1 ? actions.DiscreteActions[1] : -1;
@@ -111,24 +111,26 @@ public class CharacterAgent : Agent
         characterController.JumpInput = jump;
         characterController.ButtonInput = interact;
 
-        //if (interact)
-        //{
-        //    float interactZone = .5f;
-        //    Collider[] collider3DArray = Physics.OverlapBox(transform.position, Vector3.one * interactZone);
-        //    foreach (Collider collider in collider3DArray)
-        //    {
-        //        if (collider.TryGetComponent(out Button activatePlatform))
-        //        {
-        //            if (activatePlatform.CanUseButton())
-        //            {
-        //                //Debug.Log("Collison with button, adding reward");
-        //                activatePlatform.UseButton();
-        //                AddReward(1f);
-        //            }
-        //        }
-        //    }
+        if (interact)
+        {
+            float interactZone = .5f;
+            Collider[] collider3DArray = Physics.OverlapBox(transform.position, Vector3.one * interactZone);
+            foreach (Collider collider in collider3DArray)
+            {
+                if (collider.TryGetComponent(out Button activatePlatform))
+                {
+                    if (activatePlatform.CanUseButton())
+                    {
+                        Debug.Log("Collison with button, adding reward");
+                        //activatePlatform.UseButton();
+                        AddReward(1f);
+                        platformButton.ResetButton();
+                        EndEpisode();
+                    }
+                }
+            }
 
-        //}
+        }
         ////AddReward(-1f / MaxStep);
 
         //if (platformButton.isPlatformActive && platformButton.canUseButton)
@@ -142,13 +144,13 @@ public class CharacterAgent : Agent
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "coin")
-        {
-            AddReward(1f);
-            //platformButton.ResetButton();
-            //OnCollectCoin?.Invoke(this, EventArgs.Empty);
+        //if (other.tag == "coin")
+        //{
+        //    AddReward(1f);
+        //    //platformButton.ResetButton();
+        //    //OnCollectCoin?.Invoke(this, EventArgs.Empty);
 
-            EndEpisode();
-        }
+        //    EndEpisode();
+        //}
     }
 }

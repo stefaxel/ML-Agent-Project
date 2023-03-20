@@ -5,46 +5,46 @@ using UnityEngine;
 
 public class Button : MonoBehaviour
 {
-    //[SerializeField] private GameObject platformGameObject;
-    //[SerializeField] private Transform agentTransform;
+    [SerializeField] private GameObject platformGameObject;
+    [SerializeField] private Transform agentTransform;
 
-    //public event EventHandler OnUsed;
+    public event EventHandler OnUsed;
 
-    //public GameObject platform;
-    //public bool isPlatformActive;
+    public GameObject platform;
+    public bool isPlatformActive;
 
-    ////[SerializeField] private Transform buttonTransform;
-    //public bool canUseButton;
+    //[SerializeField] private Transform buttonTransform;
+    public bool canUseButton;
 
-    //private void Awake()
-    //{
-    //    //buttonTransform = transform.Find("Button");
-    //    canUseButton = true;
-    //}
+    private void Awake()
+    {
+        //buttonTransform = transform.Find("Button");
+        canUseButton = true;
+    }
 
-    //public bool CanUseButton()
-    //{
-    //    return canUseButton;
-    //}
+    public bool CanUseButton()
+    {
+        return canUseButton;
+    }
 
-    //public void UseButton()
-    //{
-    //    if(canUseButton)
-    //    {
-    //        canUseButton= false;
+    public void UseButton()
+    {
+        if (canUseButton)
+        {
+            canUseButton = false;
 
-    //        OnUsed?.Invoke(this, EventArgs.Empty);
+            OnUsed?.Invoke(this, EventArgs.Empty);
 
-    //        platform.SetActive(true);
-    //        isPlatformActive = true;
-    //    }
-    //}
+            //platform.SetActive(true);
+            isPlatformActive = true;
+        }
+    }
 
-    //public void ResetButton()
-    //{
-    //    canUseButton = true;
-    //    isPlatformActive = false;
-    //    platform.SetActive(false);
-    //}
+    public void ResetButton()
+    {
+        canUseButton = true;
+        isPlatformActive = false;
+        //platform.SetActive(false);
+    }
 
 }
