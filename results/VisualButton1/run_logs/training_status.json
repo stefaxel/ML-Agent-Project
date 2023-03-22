@@ -1,0 +1,29 @@
+{
+    "CameraButton": {
+        "checkpoints": [
+            {
+                "steps": 479696,
+                "file_path": "results\\VisualButton1\\CameraButton\\CameraButton-479696.onnx",
+                "reward": 0.9594999952749772,
+                "creation_time": 1679509729.8695438,
+                "auxillary_file_paths": [
+                    "results\\VisualButton1\\CameraButton\\CameraButton-479696.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 479696,
+            "file_path": "results\\VisualButton1\\CameraButton.onnx",
+            "reward": 0.9594999952749772,
+            "creation_time": 1679509729.8695438,
+            "auxillary_file_paths": [
+                "results\\VisualButton1\\CameraButton\\CameraButton-479696.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.13.1+cpu"
+    }
+}

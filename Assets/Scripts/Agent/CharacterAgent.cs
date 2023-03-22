@@ -52,7 +52,10 @@ public class CharacterAgent : Agent
             platform.transform.position = startPositionPlatform + Quaternion.Euler(Vector3.up * UnityEngine.Random.Range(0f, 360f)) * Vector3.forward * 5f;
         }
         
-
+        if(collectCoin && pressButton)
+        {
+            platformButton.ResetButton();
+        }
         //OnEpisodeBeginEvent?.Invoke(this, EventArgs.Empty);
 
     }
@@ -111,7 +114,7 @@ public class CharacterAgent : Agent
             if (Vector3.Distance(startPositionPlatform, transform.position) > 10f)
             {
                 AddReward(-1f);
-                //platformButton.ResetButton();
+                platformButton.ResetButton();
                 EndEpisode();
             }
         }
@@ -141,18 +144,18 @@ public class CharacterAgent : Agent
                         if (activatePlatform.CanUseButton())
                         {
                             //Debug.Log("Collison with button, adding reward");
-                            //activatePlatform.UseButton();
+                            activatePlatform.UseButton();
                             AddReward(1f);
-                            platformButton.ResetButton();
-                            EndEpisode();
+                            //platformButton.ResetButton();
+                            //EndEpisode();
                         }
                     }
                 }
-
+                
             }
         }
-        
-        AddReward(-1f / MaxStep);
+
+        //AddReward(-1f / MaxStep);
 
         //if (platformButton.isPlatformActive && platformButton.canUseButton)
         //{
@@ -170,7 +173,7 @@ public class CharacterAgent : Agent
             if (other.tag == "coin")
             {
                 AddReward(1f);
-                //platformButton.ResetButton();
+                platformButton.ResetButton();
                 //OnCollectCoin?.Invoke(this, EventArgs.Empty);
 
                 EndEpisode();

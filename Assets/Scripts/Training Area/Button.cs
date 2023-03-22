@@ -35,7 +35,7 @@ public class Button : MonoBehaviour
 
             OnUsed?.Invoke(this, EventArgs.Empty);
 
-            //platform.SetActive(true);
+            platform.SetActive(true);
             isPlatformActive = true;
         }
     }
@@ -44,7 +44,7 @@ public class Button : MonoBehaviour
     {
         canUseButton = true;
         isPlatformActive = false;
-        //platform.SetActive(false);
+        platform.SetActive(false);
     }
 
 }

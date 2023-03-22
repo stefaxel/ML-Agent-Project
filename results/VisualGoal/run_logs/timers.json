@@ -1,0 +1,47 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1679510521",
+        "python_version": "3.9.13 (tags/v3.9.13:6de2ca5, May 17 2022, 16:36:42) [MSC v.1929 64 bit (AMD64)]",
+        "command_line_arguments": "E:\\Unity Games\\ML-Agent Project\\ML-Agent-Project\\venv\\Scripts\\mlagents-learn config/visualMoveToGoal.yaml --run-id=VisualGoal",
+        "mlagents_version": "0.30.0",
+        "mlagents_envs_version": "0.30.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "1.13.1+cpu",
+        "numpy_version": "1.21.2",
+        "end_time_seconds": "1679510529"
+    },
+    "total": 7.529848100000001,
+    "count": 1,
+    "self": 0.005607200000000034,
+    "children": {
+        "run_training.setup": {
+            "total": 0.07013440000000015,
+            "count": 1,
+            "self": 0.07013440000000015
+        },
+        "TrainerController.start_learning": {
+            "total": 7.4541065,
+            "count": 1,
+            "self": 0.00034779999999923206,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 7.4537507,
+                    "count": 1,
+                    "self": 7.4537507
+                },
+                "trainer_threads": {
+                    "total": 7.000000010748408e-07,
+                    "count": 1,
+                    "self": 7.000000010748408e-07
+                },
+                "TrainerController._save_models": {
+                    "total": 7.300000000043383e-06,
+                    "count": 1,
+                    "self": 7.300000000043383e-06
+                }
+            }
+        }
+    }
+}
