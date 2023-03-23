@@ -53,8 +53,8 @@ public class CharacterAgent : Agent
             platform.transform.position = startPositionPlatform + Quaternion.Euler(Vector3.up * UnityEngine.Random.Range(0f, 360f)) * Vector3.forward * 5f;
         }
 
-        //buttonPlatform.SetActive(true);
-        buttonUsed = false;
+        buttonPlatform.SetActive(true);
+        //buttonUsed = false;
         
         if(collectCoin && pressButton)
         {
@@ -152,8 +152,8 @@ public class CharacterAgent : Agent
                             AddReward(1f);
                             //platformButton.ResetButton();
                             //EndEpisode();
-                            //buttonPlatform.SetActive(false);
-                            StartCoroutine(DeactivatePlatform());
+                            buttonPlatform.SetActive(false);
+                            //StartCoroutine(DeactivatePlatform());
                         }
                     }
                 }
@@ -161,11 +161,11 @@ public class CharacterAgent : Agent
             }
         }
 
-        if(interact && buttonUsed)
-        {
-            AddReward(-.5f);
-            EndEpisode();
-        }
+        //if(interact && buttonUsed)
+        //{
+        //    AddReward(-.5f);
+        //    EndEpisode();
+        //}
 
         AddReward(-1f / MaxStep);
 
@@ -178,11 +178,11 @@ public class CharacterAgent : Agent
         //}
     }
 
-    IEnumerator DeactivatePlatform()
-    {
-        yield return new WaitForSeconds(0.1f);
-        buttonUsed = true;
-    }
+    //IEnumerator DeactivatePlatform()
+    //{
+    //    yield return new WaitForSeconds(0.1f);
+    //    buttonUsed = true;
+    //}
 
     private void OnTriggerEnter(Collider other)
     {

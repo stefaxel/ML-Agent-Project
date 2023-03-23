@@ -1,0 +1,29 @@
+{
+    "CameraGoal": {
+        "checkpoints": [
+            {
+                "steps": 447699,
+                "file_path": "results\\VisualGoal5\\CameraGoal\\CameraGoal-447699.onnx",
+                "reward": 0.5,
+                "creation_time": 1679585092.9334147,
+                "auxillary_file_paths": [
+                    "results\\VisualGoal5\\CameraGoal\\CameraGoal-447699.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 447699,
+            "file_path": "results\\VisualGoal5\\CameraGoal.onnx",
+            "reward": 0.5,
+            "creation_time": 1679585092.9334147,
+            "auxillary_file_paths": [
+                "results\\VisualGoal5\\CameraGoal\\CameraGoal-447699.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.13.1+cpu"
+    }
+}
