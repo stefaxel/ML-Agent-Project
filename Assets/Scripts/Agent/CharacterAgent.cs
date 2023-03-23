@@ -23,6 +23,7 @@ public class CharacterAgent : Agent
 
     public bool pressButton;
     public bool collectCoin;
+    public bool buttonUsed;
 
     public override void Initialize()
     {
@@ -51,6 +52,9 @@ public class CharacterAgent : Agent
 
             platform.transform.position = startPositionPlatform + Quaternion.Euler(Vector3.up * UnityEngine.Random.Range(0f, 360f)) * Vector3.forward * 5f;
         }
+
+        //buttonPlatform.SetActive(true);
+        buttonUsed = false;
         
         if(collectCoin && pressButton)
         {
@@ -135,7 +139,7 @@ public class CharacterAgent : Agent
         {
             if (interact)
             {
-                float interactZone = .3f;
+                float interactZone = .2f;
                 Collider[] collider3DArray = Physics.OverlapBox(transform.position, Vector3.one * interactZone);
                 foreach (Collider collider in collider3DArray)
                 {
@@ -148,6 +152,8 @@ public class CharacterAgent : Agent
                             AddReward(1f);
                             //platformButton.ResetButton();
                             //EndEpisode();
+                            //buttonPlatform.SetActive(false);
+                            StartCoroutine(DeactivatePlatform());
                         }
                     }
                 }
@@ -155,7 +161,13 @@ public class CharacterAgent : Agent
             }
         }
 
-        //AddReward(-1f / MaxStep);
+        if(interact && buttonUsed)
+        {
+            AddReward(-.5f);
+            EndEpisode();
+        }
+
+        AddReward(-1f / MaxStep);
 
         //if (platformButton.isPlatformActive && platformButton.canUseButton)
         //{
@@ -166,13 +178,19 @@ public class CharacterAgent : Agent
         //}
     }
 
+    IEnumerator DeactivatePlatform()
+    {
+        yield return new WaitForSeconds(0.1f);
+        buttonUsed = true;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (collectCoin)
         {
             if (other.tag == "coin")
             {
-                AddReward(1f);
+                AddReward(2f);
                 platformButton.ResetButton();
                 //OnCollectCoin?.Invoke(this, EventArgs.Empty);
 
