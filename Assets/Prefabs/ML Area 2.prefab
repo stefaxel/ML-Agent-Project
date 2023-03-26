@@ -818,7 +818,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8540469153836144566
 Transform:
   m_ObjectHideFlags: 0
@@ -1117,7 +1117,7 @@ MonoBehaviour:
   platform: {fileID: 8799721208414472954}
   buttonPlatform: {fileID: 8540469153836144521}
   platformButton: {fileID: 8540469153148359134}
-  pressButton: 1
+  pressButton: 0
   collectCoin: 1
   buttonUsed: 0
 --- !u!114 &8799721207238302110
@@ -1159,10 +1159,10 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 24a8864a3b676ae4ca821e6dfb8edf29, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: e39dcef8c9098384a8133e4e4d13eccd, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
-  m_BehaviorName: CameraGoal
+  m_BehaviorName: CameraCoin
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
@@ -1443,7 +1443,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8799721208414472950
 Transform:
   m_ObjectHideFlags: 0

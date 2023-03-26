@@ -1,0 +1,29 @@
+{
+    "CameraCoin": {
+        "checkpoints": [
+            {
+                "steps": 183024,
+                "file_path": "results\\VisualCoinCollector12\\CameraCoin\\CameraCoin-183024.onnx",
+                "reward": 0.9725059760468346,
+                "creation_time": 1679837505.3700454,
+                "auxillary_file_paths": [
+                    "results\\VisualCoinCollector12\\CameraCoin\\CameraCoin-183024.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 183024,
+            "file_path": "results\\VisualCoinCollector12\\CameraCoin.onnx",
+            "reward": 0.9725059760468346,
+            "creation_time": 1679837505.3700454,
+            "auxillary_file_paths": [
+                "results\\VisualCoinCollector12\\CameraCoin\\CameraCoin-183024.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.13.1+cpu"
+    }
+}

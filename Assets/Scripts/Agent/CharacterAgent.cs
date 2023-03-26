@@ -35,7 +35,7 @@ public class CharacterAgent : Agent
 
     public override void OnEpisodeBegin()
     {
-        if(pressButton)
+        if (pressButton)
         {
             transform.position = startPositionButton;
             transform.rotation = Quaternion.Euler(Vector3.up * UnityEngine.Random.Range(0f, 360f));
@@ -43,8 +43,8 @@ public class CharacterAgent : Agent
 
             buttonPlatform.transform.position = startPositionButton + Quaternion.Euler(Vector3.up * UnityEngine.Random.Range(0f, 360f)) * Vector3.forward * 5f;
         }
-        
-        if(collectCoin)
+
+        if (collectCoin)
         {
             transform.position = startPositionPlatform;
             transform.rotation = Quaternion.Euler(Vector3.up * UnityEngine.Random.Range(0f, 360f));
@@ -53,39 +53,14 @@ public class CharacterAgent : Agent
             platform.transform.position = startPositionPlatform + Quaternion.Euler(Vector3.up * UnityEngine.Random.Range(0f, 360f)) * Vector3.forward * 5f;
         }
 
-        buttonPlatform.SetActive(true);
-        //buttonUsed = false;
-        
-        if(collectCoin && pressButton)
+
+        if (collectCoin && pressButton)
         {
             platformButton.ResetButton();
+            buttonPlatform.SetActive(true);
         }
-        //OnEpisodeBeginEvent?.Invoke(this, EventArgs.Empty);
 
     }
-
-    //public override void CollectObservations(VectorSensor sensor)
-    //{
-    //    sensor.AddObservation(platformButton.CanUseButton() ? 1 : 0);
-
-    //    Vector3 dirToPlatformButon = (buttonPlatform.transform.localPosition - transform.position).normalized;
-    //    sensor.AddObservation(dirToPlatformButon.x);
-    //    sensor.AddObservation(dirToPlatformButon.z);
-
-    //    sensor.AddObservation(platformButton.isPlatformActive ? 1 : 0);
-
-    //    if (platformButton.isPlatformActive)
-    //    {
-    //        Vector3 dirToCoin = (platform.transform.localPosition - transform.position).normalized;
-    //        sensor.AddObservation(dirToCoin.x);
-    //        sensor.AddObservation(dirToCoin.z);
-    //    }
-    //    else
-    //    {
-    //        sensor.AddObservation(0f);
-    //        sensor.AddObservation(0f);
-    //    }
-    //}
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {
@@ -135,7 +110,7 @@ public class CharacterAgent : Agent
         characterController.JumpInput = jump;
         characterController.ButtonInput = interact;
 
-        if(pressButton)
+        if (pressButton)
         {
             if (interact)
             {
@@ -147,56 +122,37 @@ public class CharacterAgent : Agent
                     {
                         if (activatePlatform.CanUseButton())
                         {
-                            //Debug.Log("Collison with button, adding reward");
                             activatePlatform.UseButton();
                             AddReward(1f);
-                            //platformButton.ResetButton();
-                            //EndEpisode();
                             buttonPlatform.SetActive(false);
-                            //StartCoroutine(DeactivatePlatform());
                         }
                     }
                 }
-                
+
             }
         }
-
-        //if(interact && buttonUsed)
-        //{
-        //    AddReward(-.5f);
-        //    EndEpisode();
-        //}
 
         AddReward(-1f / MaxStep);
 
-        //if (platformButton.isPlatformActive && platformButton.canUseButton)
-        //{
-        //    //platformButton.platform.SetActive(false);
-        //    platformButton.ResetButton();
-        //    AddReward(-1f);
-        //    EndEpisode();
-        //}
     }
 
-    //IEnumerator DeactivatePlatform()
-    //{
-    //    yield return new WaitForSeconds(0.1f);
-    //    buttonUsed = true;
-    //}
 
     private void OnTriggerEnter(Collider other)
     {
-        if (collectCoin)
-        {
-            if (other.tag == "coin")
-            {
-                AddReward(2f);
-                platformButton.ResetButton();
-                //OnCollectCoin?.Invoke(this, EventArgs.Empty);
 
+        if (other.tag == "coin")
+        {
+            AddReward(1f);
+            if (pressButton)
+            {
+                platformButton.ResetButton();
                 EndEpisode();
             }
+
+
+
         }
+
 
     }
 }
